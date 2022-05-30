@@ -64,24 +64,24 @@ Si se entraba a alguno de los archivos de los datasets se veía así.
 Para la gestión de los archivos hacia HDFS mediante SSH primero se agregaron los datasets a HDFS. Para esto se ingresó a los detalles del cluster que se había creado y se va hacia la pestaña de Steps y se dio en Add Step.  
 ![alt text](/lab1/img/steps.jpg "addstep")  
 Luego en la configuración se agregaron estos parámetros. En los argumentos se escogió para el origen se selecciona el bucket que se había creado en el Lab anterior y el destino una carpeta /datasets.  
-![alt text](/lab1/img/addstep.jpg "stepcnf")  
+![alt text](/lab1/img/pasotesagregados.jpg "stepcnf")  
 Luego ya se ingresó al nodo master mediante SSH y se revisó lo que se copió con el comando:  
 ```
 hdfs dfs -ls /datasets
 ```
-![alt text](/BigData/Lab1/img/hdfs_datasets.jpg "hdfsdataset")  
+![alt text](/lab1/img/hdfs.jpg "hdfsdataset")  
 También se corrieron los siguientes comandos para revisar bien la estructura de directorios que había en HDFS:
 ```
 hdfs dfs -ls /
 hdfs dfs -ls /user
 ```
-![alt text](/BigData/Lab1/img/hdfs_lis.jpg "hdfslist")  
+![alt text](/lab1/img/hdfsuser.jpg "hdfslist")  
 Luego en la carpeta del usuario se crearon los directorios donde se guardó la información de los datasets.
 ```
-hdfs dfs -mkdir /user/hadoop/datasets/airlines
 hdfs dfs -mkdir /user/hadoop/datasets/all-news
 hdfs dfs -mkdir /user/hadoop/datasets/gutenberg
 hdfs dfs -mkdir /user/hadoop/datasets/gutenberg-small
+hdfs dfs -mkdir /user/hadoop/datasets/airlines
 hdfs dfs -mkdir /user/hadoop/datasets/onu
 hdfs dfs -mkdir /user/hadoop/datasets/otros
 hdfs dfs -mkdir /user/hadoop/datasets/retail_logs
@@ -99,49 +99,47 @@ hadoop fs -cp /datasets/retail_logs/* /user/hadoop/datasets/retail_logs/
 hadoop fs -cp /datasets/spark/* /user/hadoop/datasets/spark/
 ```
 Para el ejemplo se muestra la información que se copió de la carpeta de Gutenberg-Small
-![alt text](/BigData/Lab1/img/gutenberg_small.jpg "gutenbergsmall")  
+![alt text](/lab1/img/copia.jpg "gutenbergsmall")  
 
 ## Gestión de archivos hacia AWS S3 via Hue
 Desde Hue también se pudo crear un bucket. Se ingresó a la opción de S3 en el menú y aparte de observar los buckets existentes también se tenía la opción de crear más.  
-![alt text](/BigData/Lab1/img/s3_hue_1.jpg "s3hue1")  
 Luego de crear el bucket exitosamente dentro de él se crearon los directorios donde iban a estar los datasets y quedó de esta forma.  
-![alt text](/BigData/Lab1/img/s3_hue_2.jpg "s3hue2")  
-Luego de tener todos los directorios ya dentro de cada uno se pudieron subir los archivos que le correspondían a cada carpeta.  
+Luego de tener todos los directorios ya dentro de cada uno se pudieron subir los archivos que le correspondían a cada carpeta.
+![alt text](/lab1/img/airlines.jpg "s3hue1")   
 En AWS S3 también se comprobó que se hubiese creado todo bien y así se mostraba.  
-![alt text](/BigData/Lab1/img/s3_hue_3.jpg "s3hue3")  
+![alt text](/lab1/img/carpetashue.jpg "s3hue1")  
+
+
 
 ## Gestión de archivos hacia AWS S3 via SSH
 Para la gestión de archivos en S3 por SSH primero se conectó al nodo master mediante SSH y ya allí se empezaron a realizar los comandos de manejo de S3. El primero fue para crear un bucket.  
 ```
-aws s3 mb s3://bucketjplj-ssh
+aws s3 mb s3://salbissercbucketazo-ssh
 ```  
-![alt text](/BigData/Lab1/img/s3_ssh_1.jpg "s3ssh1")  
-Luego se corrió otro comando que creaba los directorios dentro del bucket.  
+![alt text](/lab1/img/bucketazo.jpg "s3ssh1")  
+Luego se corrió otro comando que creaba los directorios dentro del bucket, aca lo utilice para todos
 ```
-aws s3api put-object --bucket bucketjplj-ssh --key airlines/
-aws s3api put-object --bucket bucketjplj-ssh --key all-news/
-aws s3api put-object --bucket bucketjplj-ssh --key gutenberg/
-aws s3api put-object --bucket bucketjplj-ssh --key gutenberg-small/
-aws s3api put-object --bucket bucketjplj-ssh --key onu/
-aws s3api put-object --bucket bucketjplj-ssh --key otros/
-aws s3api put-object --bucket bucketjplj-ssh --key retail_logs/
-aws s3api put-object --bucket bucketjplj-ssh --key spark/
+aws s3api put-object --bucket salbissercbucketazo-ssh --key airlines/
 ```  
-![alt text](/BigData/Lab1/img/s3_ssh_2.jpg "s3ssh2")  
+![alt text](/lab1/img/archivobucket.jpg "s3ssh2")  
 Los directorios en AWS quedaron así.  
-![alt text](/BigData/Lab1/img/s3_ssh_3.jpg "s3ssh3")  
+![alt text](/lab1/img/funciona.jpg "s3ssh3")  
 Luego para la subida de archivos a cada uno de los directorios se realizaba el siguiente comando.  
 ```
-aws s3 cp C:\Users\User\Desktop\Topicostelematica\datasets\airlines\* s3://bucketjplj-ssh/airlines/
+aws s3 cp D:\Universidad\9 semestre\Labtelematica\funciona\telematicafunciona\datasets\airlines.csv s3://salbissercbucketazo-ssh/airlines/
 ```  
 Y los archivos se subieron también a AWS S3 satisfactoriamente.  
-![alt text](/BigData/Lab1/img/s3_ssh_4.jpg "s3ssh4")  
+![alt text](/lab1/img/funcionando.jpg "s3ssh4")  
 
 ## Acceso público a Bucket S3
 
 Para garantizar acceso público a la información del bucket se garantizó acceso mediante el botón de make public.  
-![alt text](/BigData/Lab1/img/make_public.jpg "makepublic")  
-En los permisos del bucket se agregan la opción de leer la información desde cualquier acceso público.  
-![alt text](/BigData/Lab1/img/acl_per.jpg "acl_per")  
+En los permisos del bucket se agregan la opción de leer la información desde cualquier acceso público. 
+![alt text](/lab1/img/permisos.jpg "makepublic")  
+
+Aca podemos ver el exito
+![alt text](/lab1/img/exito.jpg "makepublic")  
+
+ 
 Ya se puede acceder a la información del bucket en este link:  
-https://datasetsjplj.s3.us-east-1.amazonaws.com/
+https://salbissercbucketazo-ssh.s3.us-east-1.amazonaws.com/
