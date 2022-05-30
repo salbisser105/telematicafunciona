@@ -43,7 +43,7 @@ Se configuraron varios servicios del cluster para el trabajo con los datos.
 Se necesitaban abrir los puertos 8888, 9443 y 8890 para configurar estos servicios. Esto se realizó desde EMR en la pestaña de Block Public Access.  
 ![alt text](/lab0/img/reglas.jpg "baccesemr")  
 También se debían agregar las reglas de entrada al grupo de seguridad del nodo master para que permitiera tráfico por esos puertos. Para ingresar al grupo de seguridad del nodo master se ngresó a los detalles del cluster y en la parte de abajo señalaba el link para entrar al grupo de seguridad del nodo master.  
-![alt text](/lab0/img/seguridadcluster.jpg"clusterinfo")  
+![alt text](/lab0/img/seguridadcluster.jpg "clusterinfo")  
 Y luego dentro del grupo de seguridad se modificaron las reglas.  
 
 
