@@ -15,56 +15,56 @@ En la primera opción se seleccionó emr-6.3.1 según el tutorial y las opciones
 - JupyterEnterpriseGateway 2.1.0
 
 Quedó de esta forma:  
-![alt text](/img/opcionescluster.jpg "emr1")  
+![alt text](/lab1/img/opcionescluster.jpg "emr1")  
 Se dio en next y en el siguiente paso de Hardware se deja todo por defecto revisando que se tenga 1 Nodo Master y 2 Nodos Core.  
 Luego en el tercer paso de General Cluster Settings se le agregó un nombre al cluster y se seleccionó la dirección en la que se guardaron los datasets en S3:  
-![alt text](/img/seguridadcluster.jpg "emr2")  
+![alt text](/lab1/img/seguridadcluster.jpg "emr2")  
 En el último paso de Security se seleccionó el Key Pair que se creó al inicio del reto y se dio en crear cluster.  
 Después de esperar unos minutos el cluster se crea y se muestra funcionando asi:  
-![alt text](/img/conexion.jpg"clusterok")    
+![alt text](/lab1/img/conexion.jpg"clusterok")    
 
 
 ## Activación servicios del cluster
 Se configuraron varios servicios del cluster para el trabajo con los datos.  
 Se necesitaban abrir los puertos 8888, 9443 y 8890 para configurar estos servicios. Esto se realizó desde EMR en la pestaña de Block Public Access.  
-![alt text](/BigData/Lab0/img/blockaccessemr.jpg "baccesemr")  
+![alt text](/lab1/img/reglas.jpg "baccesemr")  
 También se debían agregar las reglas de entrada al grupo de seguridad del nodo master para que permitiera tráfico por esos puertos. Para ingresar al grupo de seguridad del nodo master se ngresó a los detalles del cluster y en la parte de abajo señalaba el link para entrar al grupo de seguridad del nodo master.  
-![alt text](/img/seguridadcluster.jpg"clusterinfo")  
+![alt text](/lab1/img/seguridadcluster.jpg"clusterinfo")  
 Y luego dentro del grupo de seguridad se modificaron las reglas.   
 
 
 ### Hue
 Para ingresar a Hue se copió el enlace de user interfaces que decía Hue y se ingresó.  
 En la página de inicio se deben ingresar unas credenciales para crear cuenta. En el usuario se ingresó hadoop y la contraseña siguiendo los parámetros que se mostraban.  
-![alt text](/img/hue.jpg "loginhue")  
+![alt text](/lab1/img/hue.jpg "loginhue")  
 Luego de ingresar ya apareció toda la aplicación y se puede ingresar a Hive y a varios otros lenguajes y también se puede acceder a la información que se tenía almacenada en los buckets.  
 
 
 ## Acceso al nodo master con SSH
 En el grupo de seguridad del nodo master también se agregó una regla de entrada que permitiera el tráfico de SSH.  
 Ingresando a los detalles del cluster se podía observar una opción de conectarse al nodo master mediante SSH. Se copió el comando que aparecía para la conexión y se obtuvo la conexión mediante SSH exitosa.  
-![alt text](/img/conexion.jpg "sshmaster")  
+![alt text](/lab1/img/conexion.jpg "sshmaster")  
 
 ## Gestión de archivos hacia HDFS via Hue
 Se ingresó a Hue como se explicó en la configuración de Hue. Ya en Hue se buscó la opción de Files en el menú de la izquierda ya que ese es el HDFS.  
 Allí se encontró la carpeta de /user. Para agregar más archivos se creó un nuevo directorio en el que se almacenaron nuevos datasets.  
-![alt text](/img/hueuser.jpg "hdfshue1")  
+![alt text](/lab1/img/hueuser.jpg "hdfshue1")  
 Dentro del directorio se creó una carpeta datasets.  
-![alt text](/img/hueuser.jpg "hdfshue2")  
+![alt text](/lab1/img/hueuser.jpg "hdfshue2")  
 Dentro del directorio datasets se crearon carpetas para cada uno de los datasets que existían.  
 ![alt text](/img/datasetshue.jpg "hdfshue6")  
 Ya en cada una de las carpetas se seleccionó Upload files y se subieron los archivos locales a cada uno de los directorios para los datasets.  
-![alt text](/img/datasetscreados.jpg "hdfshue4")  
+![alt text](/lab1/img/datasetscreados.jpg "hdfshue4")  
 Y toda la estructura de directorios quedó así.  
-![alt text](/img/carpetas.jpg "hdfshue3")  
+![alt text](/lab1/img/carpetas.jpg "hdfshue3")  
 Si se entraba a alguno de los archivos de los datasets se veía así.  
-![alt text](/img/pordentrodatasets.jpg "hdfshue7")  
+![alt text](/lab1/img/pordentrodatasets.jpg "hdfshue7")  
 
 ## Gestión de archivos hacia HDFS via SSH
 Para la gestión de los archivos hacia HDFS mediante SSH primero se agregaron los datasets a HDFS. Para esto se ingresó a los detalles del cluster que se había creado y se va hacia la pestaña de Steps y se dio en Add Step.  
-![alt text](/BigData/Lab1/img/step_cluster.jpg "addstep")  
+![alt text](/lab1/img/steps.jpg "addstep")  
 Luego en la configuración se agregaron estos parámetros. En los argumentos se escogió para el origen se selecciona el bucket que se había creado en el Lab anterior y el destino una carpeta /datasets.  
-![alt text](/BigData/Lab1/img/step_config.jpg "stepcnf")  
+![alt text](/lab1/img/addstep.jpg "stepcnf")  
 Luego ya se ingresó al nodo master mediante SSH y se revisó lo que se copió con el comando:  
 ```
 hdfs dfs -ls /datasets
