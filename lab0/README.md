@@ -5,11 +5,11 @@ laboratorio 3 telematica
 ## Creación de Bucket S3
 Para la creación del bucket se entró al menú de S3 en AWS y se seleccionó en Create Bucket. Se creó el bucket con esta información:  
 ![alt text](/lab0/img/bucket.jpg "bucket")  
-Luego se ingresó al bucket y se crearon directorios para manejar la información que se iba a subir. Dentro del bucket se seleccionó Create folder y se ingresó esta información.  
+Luego se ingresó al bucket y se crearon directorios para manejar la información que se iba a subir. Dentro del bucket se seleccionó crear directorio y se ingresó lo siguiente. 
 ![alt text](/lab0/img/carpeta.jpg "folderraw")  
-Dentro de la carpeta creada se seleccionó la opción de Upload para subir la información de los datasets  
+Dentro de la carpeta creada se seleccionó la opción de cargar archivos para subir la información de los datasets  
 ![alt text](/lab0/img/archivoscargados.jpg "upload")  
-Cuando se subieron los archivos había unos que no se necesitaban entonces se seleccionaron para eliminarlos y luego se subió la información.  Acá se dejaron solo los archivos necesarios, de estos hubo que realizar algunas movidas con los datasets entre ellos, descomprimir zips y entrrar a descargar archivos.
+Se seleccionaron solo los archivos necesarios y estos se subieron.
 
 ## Creación de Key Pair
 Para la creación del Key Pair se entró al menú de EC2 en AWS y se seleccionó la opción de Key Pairs.

@@ -2,8 +2,8 @@
 
 La creación del Key Pair y del Bucket S3 ya se realizó en el laboratorio 0.
 ## Creación Cluster EMR
-Para la creación del cluster se debió ir al menú de EMR en AWS y seleccionar Create Cluster.  
-Inmediatamente se ingresa se tuvo que seleccionar en Advanced Options para seleccionar con más detalle las configuraciones que se necesitan.   
+Para la creación del cluster fui al menú de EMR en AWS y seleccionar Create Cluster.  
+Se le dio a opciones vanzadas para hacer las configuraciones necesarias.   
 En la primera opción se seleccionó emr-6.3.1 según el tutorial y las opciones de: 
 - Hue 4.9.0
 - Spark 3.1.1
@@ -17,18 +17,18 @@ En la primera opción se seleccionó emr-6.3.1 según el tutorial y las opciones
 Quedó de esta forma:  
 ![alt text](/lab1/img/opcionescluster.jpg "emr1")  
 Se dio en next y en el siguiente paso de Hardware se deja todo por defecto revisando que se tenga 1 Nodo Master y 2 Nodos Core.  
-Luego en el tercer paso de General Cluster Settings se le agregó un nombre al cluster y se seleccionó la dirección en la que se guardaron los datasets en S3:  
+Luego en el tercer paso de configuración general del cluster se le agregó un nombre al cluster y se seleccionó la dirección en la que se guardaron los datasets en S3:  
 ![alt text](/lab1/img/seguridadcluster.jpg "emr2")  
-En el último paso de Security se seleccionó el Key Pair que se creó al inicio del reto y se dio en crear cluster.  
-Después de esperar unos minutos el cluster se crea y se muestra funcionando asi:  
+En el último paso de Seguridad se seleccionó el Key Pair que se creó al inicio del reto y se dio en crear cluster.  
+Se muestra el funcionamiento asi, con el paso de los minutos.
 ![alt text](/lab1/img/conexion.jpg"clusterok")    
 
 
 ## Activación servicios del cluster
 Se configuraron varios servicios del cluster para el trabajo con los datos.  
-Se necesitaban abrir los puertos 8888, 9443 y 8890 para configurar estos servicios. Esto se realizó desde EMR en la pestaña de Block Public Access.  
+Se abrieron los puertos 8888, 9443 y 8890 para configurar estos servicios. Esto se realizó desde EMR en la pestaña de Block Public Access.  
 ![alt text](/lab1/img/reglas.jpg "baccesemr")  
-También se debían agregar las reglas de entrada al grupo de seguridad del nodo master para que permitiera tráfico por esos puertos. Para ingresar al grupo de seguridad del nodo master se ngresó a los detalles del cluster y en la parte de abajo señalaba el link para entrar al grupo de seguridad del nodo master.  
+Era necesario agregar las reglas de entrada al grupo de seguridad del nodo master, para tener el funcionamiento correcto del trafico. Por lo que se accedio a estas y se configuraron estos peurtos necesarios.
 ![alt text](/lab1/img/seguridadcluster.jpg "clusterinfo")  
 Y luego dentro del grupo de seguridad se modificaron las reglas.   
 
@@ -101,16 +101,6 @@ hadoop fs -cp /datasets/spark/* /user/hadoop/datasets/spark/
 Para el ejemplo se muestra la información que se copió de la carpeta de Gutenberg-Small
 ![alt text](/lab1/img/copia.jpg "gutenbergsmall")  
 
-## Gestión de archivos hacia AWS S3 via Hue
-Desde Hue también se pudo crear un bucket. Se ingresó a la opción de S3 en el menú y aparte de observar los buckets existentes también se tenía la opción de crear más.  
-Luego de crear el bucket exitosamente dentro de él se crearon los directorios donde iban a estar los datasets y quedó de esta forma.  
-Luego de tener todos los directorios ya dentro de cada uno se pudieron subir los archivos que le correspondían a cada carpeta.
-![alt text](/lab1/img/airlines.jpg "s3hue1")   
-En AWS S3 también se comprobó que se hubiese creado todo bien y así se mostraba.  
-![alt text](/lab1/img/carpetashue.jpg "s3hue1")  
-
-
-
 ## Gestión de archivos hacia AWS S3 via SSH
 Para la gestión de archivos en S3 por SSH primero se conectó al nodo master mediante SSH y ya allí se empezaron a realizar los comandos de manejo de S3. El primero fue para crear un bucket.  
 ```
@@ -130,6 +120,18 @@ aws s3 cp D:\Universidad\9 semestre\Labtelematica\funciona\telematicafunciona\da
 ```  
 Y los archivos se subieron también a AWS S3 satisfactoriamente.  
 ![alt text](/lab1/img/funcionando.jpg "s3ssh4")  
+
+## Gestión de archivos hacia AWS S3 via Hue
+Desde Hue también se pudo crear un bucket. Se ingresó a la opción de S3 en el menú y aparte de observar los buckets existentes también se tenía la opción de crear más.  
+Luego de crear el bucket exitosamente dentro de él se crearon los directorios donde iban a estar los datasets y quedó de esta forma.  
+Luego de tener todos los directorios ya dentro de cada uno se pudieron subir los archivos que le correspondían a cada carpeta.
+![alt text](/lab1/img/airlines.jpg "s3hue1")   
+En AWS S3 también se comprobó que se hubiese creado todo bien y así se mostraba.  
+![alt text](/lab1/img/carpetashue.jpg "s3hue1")  
+
+
+
+
 
 ## Acceso público a Bucket S3
 
